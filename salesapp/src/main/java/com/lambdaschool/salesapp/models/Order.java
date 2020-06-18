@@ -16,12 +16,6 @@ public class Order {
 
     private double ordamount;
     private double advanceamount;
-
-    @ManyToOne
-    @JoinColumn(name = "custcode", nullable = false)
-    @JsonIgnoreProperties(value = "orders")
-    private Customer customer;
-
     private String orderdescription;
 
     @ManyToMany()
@@ -30,6 +24,15 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "paymentid"))
     @JsonIgnoreProperties(value = "orders")
     private List<Payment> payments = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "custcode", nullable = false)
+    @JsonIgnoreProperties(value = "orders")
+    private Customer customer;
+
+
+
+
 
 
     public Order() {
