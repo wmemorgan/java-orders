@@ -23,6 +23,7 @@ public class Customer {
     private String grade;
     private double openingamt;
     private double receiveamt;
+    private double paymentamt;
     private double outstandingamt;
     private String phone;
 
