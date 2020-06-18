@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> findByNameLike(String name) {
-        return null;
+    public List<Customer> findByNameLike(String likename) {
+        return customerRepository.findByCustnameContainingIgnoringCase(likename);
     }
 }

@@ -11,5 +11,5 @@ public interface CustomerService {
 
     Customer findCustomerById(long id);
 
-    List<Customer> findByNameLike(String name);
+    List<Customer> findByNameLike(String likename);
 }
