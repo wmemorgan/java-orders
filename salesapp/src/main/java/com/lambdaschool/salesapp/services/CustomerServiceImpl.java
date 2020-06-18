@@ -1,12 +1,11 @@
 package com.lambdaschool.salesapp.services;
 
 import com.lambdaschool.salesapp.models.Customer;
-import com.lambdaschool.salesapp.models.Order;
 import com.lambdaschool.salesapp.repositories.CustomerRepository;
-import com.lambdaschool.salesapp.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +14,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
-
-    @Autowired
-    private OrderRepository orderRepository;
 
     @Override
     public List<Customer> findAllCustomers() {
@@ -32,7 +28,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer findCustomerById(long id) {
-        return null;
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Customer " + id + " not found"));
     }
 
     @Override
