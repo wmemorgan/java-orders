@@ -103,7 +103,10 @@ public class Order {
         this.payments = payments;
     }
 
-    public void addPayments(Payment payment) { payments.add(payment); }
+    public void addPayments(Payment payment) {
+        payment.getOrders().add(this);
+        payments.add(payment);
+    }
 
     @Override
     public String toString() {
