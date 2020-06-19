@@ -42,7 +42,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double outstandingamt, String phone, Agent agent) {
+    public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agent agent) {
         this.custname = custname;
         this.custcity = custcity;
         this.workingarea = workingarea;
@@ -50,6 +50,7 @@ public class Customer {
         this.grade = grade;
         this.openingamt = openingamt;
         this.receiveamt = receiveamt;
+        this.paymentamt = paymentamt;
         this.outstandingamt = outstandingamt;
         this.phone = phone;
         this.agent = agent;
@@ -117,6 +118,14 @@ public class Customer {
 
     public void setReceiveamt(double receiveamt) {
         this.receiveamt = receiveamt;
+    }
+
+    public double getPaymentamt() {
+        return paymentamt;
+    }
+
+    public void setPaymentamt(double paymentamt) {
+        this.paymentamt = paymentamt;
     }
 
     public double getOutstandingamt() {
