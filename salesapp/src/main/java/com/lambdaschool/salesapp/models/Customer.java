@@ -171,6 +171,7 @@ public class Customer {
                 ", grade='" + grade + '\'' +
                 ", openingamt=" + openingamt +
                 ", receiveamt=" + receiveamt +
+                ", paymentamt=" + paymentamt +
                 ", outstandingamt=" + outstandingamt +
                 ", phone='" + phone + '\'' +
                 ", agent=" + agent +
