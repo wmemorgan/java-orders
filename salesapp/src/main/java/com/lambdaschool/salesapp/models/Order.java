@@ -93,6 +93,8 @@ public class Order {
         this.payments = payments;
     }
 
+    public void addPayments(Payment payment) { payments.add(payment); }
+
     @Override
     public String toString() {
         return "Order{" +
