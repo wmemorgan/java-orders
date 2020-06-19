@@ -53,7 +53,6 @@ public class CustomerServiceImpl implements CustomerService {
 
         // Populate object fields
         newCustomer.setCustname(customer.getCustname());
-        newCustomer.setCustcode(customer.getCustcode());
         newCustomer.setCustcity(customer.getCustcity());
         newCustomer.setWorkingarea(customer.getWorkingarea());
         newCustomer.setCustcountry(customer.getCustcountry());
@@ -75,5 +74,70 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         return customerRepository.save(newCustomer);
+    }
+
+    @Transactional
+    @Override
+    public Customer update(Customer customer, long id) {
+
+        Customer currentCustomer = customerRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Customer " + id + " Not Found"));
+
+        // Populate object fields
+
+        if (customer.getCustname() != null) {
+            currentCustomer.setCustname(customer.getCustname());
+        }
+
+        if (customer.getCustcity() != null) {
+            currentCustomer.setCustcity(customer.getCustcity());
+        }
+
+        if (customer.getWorkingarea() != null) {
+            currentCustomer.setWorkingarea(customer.getWorkingarea());
+        }
+
+        if (customer.getCustcountry() != null) {
+            currentCustomer.setCustcountry(customer.getCustcountry());
+        }
+
+        if (customer.getGrade() != null) {
+            currentCustomer.setGrade(customer.getGrade());
+        }
+
+        if (customer.hasvalueforopeningamt) {
+            currentCustomer.setOpeningamt(customer.getOpeningamt());
+        }
+
+        if (customer.hasvalueforreceiveamt) {
+            currentCustomer.setReceiveamt(customer.getReceiveamt());
+        }
+
+        if (customer.hasvalueforpaymentamt) {
+            currentCustomer.setPaymentamt(customer.getPaymentamt());
+        }
+
+        if (customer.hasvalueforoutstandingamt) {
+            currentCustomer.setOutstandingamt(customer.getOutstandingamt());
+        }
+
+        if (customer.getPhone() != null) {
+            currentCustomer.setPhone(customer.getPhone());
+        }
+
+        if (customer.getAgent() != null) {
+            currentCustomer.setAgent(customer.getAgent());
+        }
+
+        // Populate Lists
+        currentCustomer.getOrders().clear();
+
+        for (Order o : customer.getOrders()) {
+            Order newOrder = new Order(o.getOrdamount(), o.getAdvanceamount(),
+                    currentCustomer, o.getOrderdescription());
+            currentCustomer.getOrders().add(newOrder);
+        }
+
+        return customerRepository.save(currentCustomer);
     }
 }

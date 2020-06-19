@@ -15,4 +15,7 @@ public interface CustomerService {
 
     // POST & PUT
     Customer save(Customer customer);
+
+    // PATCH
+    Customer update(Customer customer, long id);
 }
