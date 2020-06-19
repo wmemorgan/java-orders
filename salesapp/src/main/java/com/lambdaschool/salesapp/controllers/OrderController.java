@@ -52,4 +52,13 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
+
+
+    // DELETE http://localhost:2019/orders/order/{ordnum}
+    @DeleteMapping("order/{ordnum}")
+    public ResponseEntity deleteOrder(@PathVariable long ordnum) {
+
+        orderService.delete(ordnum);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
