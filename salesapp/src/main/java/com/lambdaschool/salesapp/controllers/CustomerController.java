@@ -63,4 +63,14 @@ public class CustomerController {
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
+    // PUT http://localhost:2019/customers/customer/{custcode}
+    @PutMapping(value = "/customer/{custcode}", consumes = {"application/json"})
+    public ResponseEntity<?> replaceCustomer(@Valid @RequestBody Customer replaceCustomer, @PathVariable long custcode) {
+
+        replaceCustomer.setCustcode(custcode);
+        customerService.save(replaceCustomer);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
