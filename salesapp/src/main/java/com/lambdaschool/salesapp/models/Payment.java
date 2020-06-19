@@ -44,6 +44,8 @@ public class Payment {
         this.type = type;
     }
 
+    public List<Order> getOrders() { return orders; }
+
     @Override
     public String toString() {
         return "Payment{" +
