@@ -18,4 +18,7 @@ public interface CustomerService {
 
     // PATCH
     Customer update(Customer customer, long id);
+
+    // DELETE
+    void delete(long id);
 }
