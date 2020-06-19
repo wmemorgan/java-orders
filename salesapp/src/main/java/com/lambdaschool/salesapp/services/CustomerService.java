@@ -12,4 +12,7 @@ public interface CustomerService {
     Customer findCustomerById(long id);
 
     List<Customer> findByNameLike(String likename);
+
+    // POST & PUT
+    Customer save(Customer customer);
 }
