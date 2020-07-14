@@ -1,52 +1,48 @@
 package com.lambdaschool.crudyorders;
 
-import com.github.javafaker.Faker;
+//import com.github.javafaker.Faker;
+
 import com.lambdaschool.crudyorders.models.Agent;
 import com.lambdaschool.crudyorders.models.Customer;
 import com.lambdaschool.crudyorders.models.Order;
 import com.lambdaschool.crudyorders.models.Payment;
-import com.lambdaschool.crudyorders.repositories.AgentsRepository;
-import com.lambdaschool.crudyorders.repositories.CustomersRepository;
-import com.lambdaschool.crudyorders.repositories.OrdersRepository;
-import com.lambdaschool.crudyorders.repositories.PaymentRepository;
+import com.lambdaschool.crudyorders.services.AgentService;
+import com.lambdaschool.crudyorders.services.CustomerService;
+import com.lambdaschool.crudyorders.services.OrderService;
+import com.lambdaschool.crudyorders.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Random;
-import java.util.Set;
 
-
-@Transactional
-@Component
+ @Transactional
+ @Component
 public class SeedData implements CommandLineRunner
 {
     /**
      * Connects the customer table to this SeedData method
      */
     @Autowired
-    private CustomersRepository custrepos;
+    private CustomerService customerService;
 
     /**
      * Connects the agents table to this SeedData method
      */
     @Autowired
-    private AgentsRepository agentrepos;
+    private AgentService agentService;
 
     /**
      * Connects the orders table to this SeedData method
      */
     @Autowired
-    private OrdersRepository ordersrepos;
+    private OrderService orderService;
 
     /**
      * Connects the payment table to this SeedData method
      */
     @Autowired
-    private PaymentRepository paymentrepos;
+    private PaymentService paymentService;
 
     /**
      * Generates test, seed data for our application
@@ -66,10 +62,10 @@ public class SeedData implements CommandLineRunner
         Payment pay3 = new Payment("Credit Card");
         Payment pay4 = new Payment("Mobile Pay");
 
-        pay1 = paymentrepos.save(pay1);
-        pay2 = paymentrepos.save(pay2);
-        pay3 = paymentrepos.save(pay3);
-        pay4 = paymentrepos.save(pay4);
+        pay1 = paymentService.save(pay1);
+        pay2 = paymentService.save(pay2);
+        pay3 = paymentService.save(pay3);
+        pay4 = paymentService.save(pay4);
 
         Agent a01 = new Agent("Ramasundar",
             "Bangalore",
@@ -409,128 +405,108 @@ public class SeedData implements CommandLineRunner
             a10);
 
         Order o01 = new Order(1000.00,
-            600.00,
-            c13,
-            "SOD");
-        o01.addPayments(pay1);
+            600.00, "SOD",
+            c13);
+        o01.getPayments().add(pay1);
 
         Order o02 = new Order(3000.00,
-            500.00,
-            c19,
-            "SOD");
-        o02.addPayments(pay2);
+            500.00, "SOD",
+            c19);
+        o02.getPayments().add(pay2);
 
         Order o03 = new Order(4500.00,
-            900.00,
-            c07,
-            "SOD");
-        o03.addPayments(pay3);
-        o03.addPayments(pay2);
+            900.00, "SOD",
+            c07);
+        o03.getPayments().add(pay3);
+        o03.getPayments().add(pay2);
 
         Order o04 = new Order(2000.00,
-            0.00,
-            c16,
-            "SOD");
-        o04.addPayments(pay4);
+            0.00, "SOD", c16);
+        o04.getPayments().add(pay4);
 
         Order o05 = new Order(4000.00,
-            600.00,
-            c22,
-            "SOD");
-        o05.addPayments(pay2);
+            600.00,"SOD", c22);
+        o05.getPayments().add(pay2);
 
         Order o06 = new Order(2000.00,
-            0.00,
-            c12,
-            "SOD");
-        o06.addPayments(pay3);
+            0.00, "SOD",
+            c12);
+        o06.getPayments().add(pay3);
 
         Order o07 = new Order(3500.00,
-            2000.00,
-            c02,
-            "SOD");
-        o07.addPayments(pay4);
+            2000.00, "SOD", c02);
+        o07.getPayments().add(pay4);
 
         Order o08 = new Order(2500.00,
-            400.00,
-            c03,
-            "SOD");
-        o08.addPayments(pay1);
+            400.00, "SOD", c03);
+        o08.getPayments().add(pay1);
 
         Order o09 = new Order(500.00,
-            0.00,
-            c23,
-            "SOD");
-        o09.addPayments(pay3);
+            0.00, "SOD", c23);
+        o09.getPayments().add(pay3);
 
         Order o10 = new Order(4000.00,
-            700.00,
-            c07,
-            "SOD");
-        o10.addPayments(pay4);
+            700.00, "SOD", c07);
+        o10.getPayments().add(pay4);
 
         Order o11 = new Order(1500.00,
-            600.00,
-            c08,
-            "SOD");
-        o11.addPayments(pay2);
+            600.00, "SOD", c08);
+        o11.getPayments().add(pay2);
 
         Order o12 = new Order(2500.00,
-            0.00,
-            c25,
-            "SOD");
-        o12.addPayments(pay1);
+            0.00, "SOD", c25);
+        o12.getPayments().add(pay1);
 
-        agentrepos.save(a01);
-        agentrepos.save(a02);
-        agentrepos.save(a03);
-        agentrepos.save(a04);
-        agentrepos.save(a05);
-        agentrepos.save(a06);
-        agentrepos.save(a07);
-        agentrepos.save(a08);
-        agentrepos.save(a09);
-        agentrepos.save(a10);
-        agentrepos.save(a11);
-        agentrepos.save(a12);
+        agentService.save(a01);
+        agentService.save(a02);
+        agentService.save(a03);
+        agentService.save(a04);
+        agentService.save(a05);
+        agentService.save(a06);
+        agentService.save(a07);
+        agentService.save(a08);
+        agentService.save(a09);
+        agentService.save(a10);
+        agentService.save(a11);
+        agentService.save(a12);
 
-        custrepos.save(c01);
-        custrepos.save(c02);
-        custrepos.save(c03);
-        custrepos.save(c04);
-        custrepos.save(c05);
-        custrepos.save(c06);
-        custrepos.save(c07);
-        custrepos.save(c08);
-        custrepos.save(c09);
-        custrepos.save(c10);
-        custrepos.save(c11);
-        custrepos.save(c12);
-        custrepos.save(c13);
-        custrepos.save(c14);
-        custrepos.save(c15);
-        custrepos.save(c16);
-        custrepos.save(c17);
-        custrepos.save(c18);
-        custrepos.save(c19);
-        custrepos.save(c20);
-        custrepos.save(c21);
-        custrepos.save(c22);
-        custrepos.save(c23);
-        custrepos.save(c24);
-        custrepos.save(c25);
+        customerService.save(c01);
+        customerService.save(c02);
+        customerService.save(c03);
+        customerService.save(c04);
+        customerService.save(c05);
+        customerService.save(c06);
+        customerService.save(c07);
+        customerService.save(c08);
+        customerService.save(c09);
+        customerService.save(c10);
+        customerService.save(c11);
+        customerService.save(c12);
+        customerService.save(c13);
+        customerService.save(c14);
+        customerService.save(c15);
+        customerService.save(c16);
+        customerService.save(c17);
+        customerService.save(c18);
+        customerService.save(c19);
+        customerService.save(c20);
+        customerService.save(c21);
+        customerService.save(c22);
+        customerService.save(c23);
+        customerService.save(c24);
+        customerService.save(c25);
 
-        ordersrepos.save(o01);
-        ordersrepos.save(o02);
-        ordersrepos.save(o03);
-        ordersrepos.save(o04);
-        ordersrepos.save(o05);
-        ordersrepos.save(o06);
-        ordersrepos.save(o07);
-        ordersrepos.save(o08);
-        ordersrepos.save(o09);
-        ordersrepos.save(o10);
-        ordersrepos.save(o11);
-        ordersrepos.save(o12);
+        orderService.save(o01);
+        orderService.save(o02);
+        orderService.save(o03);
+        orderService.save(o04);
+        orderService.save(o05);
+        orderService.save(o06);
+        orderService.save(o07);
+        orderService.save(o08);
+        orderService.save(o09);
+        orderService.save(o10);
+        orderService.save(o11);
+        orderService.save(o12);
     }
 }
