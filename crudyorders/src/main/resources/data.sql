@@ -1,3 +1,12 @@
+-- noinspection SqlNoDataSourceInspectionForFile
+-- noinspection SqlDialectInspectionForFile
+
+DELETE
+FROM payments;
+
+DELETE
+FROM orderspayments;
+
 DELETE
 FROM orders;
 
